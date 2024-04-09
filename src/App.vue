@@ -1,28 +1,51 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-app>
+    <v-main>
+      <v-app-bar color="blue">{{ name }}</v-app-bar>
+      <div v-for="(message, index) in messages" :key="index">
+        <MessageCard :message="message"/>
+      </div>
+      <BottomToolbar @send-message="addMessage($event)" />
+    </v-main>
+  </v-app>
 </template>
-
+  
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import MessageCard from './components/MessageCard.vue'
+import BottomToolbar from './components/BottomToolbar.vue'
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    MessageCard,
+    BottomToolbar
+  },
+  data() {
+    return {
+      name: 'Felipe Sabino',
+      messages: [
+        {
+          name: 'Felipe Sabino',
+          text: 'Olá'
+        },
+        {
+          name: 'Felipe Sabino',
+          text: 'Tudo bem?'
+        },
+      ]
+    }
+  },
+  methods: {
+    addMessage(eventoCapturado) {
+      const objetoFormatado = this.formatarMensagem(eventoCapturado)
+      this.messages.push(objetoFormatado)
+    },
+    formatarMensagem(texto) {
+      return {
+        name: 'Eu',
+        text: texto
+      }
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+  
