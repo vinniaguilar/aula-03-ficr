@@ -1,19 +1,19 @@
 <template>
-<div>
-  <v-app-bar color="blue">
-    {{ name }}
-    <v-btn @click="goTo('/home')">Voltar para página principal</v-btn>
-  </v-app-bar>
-  <div v-for="(message, index) in messages" :key="index">
-    <MessageCard :message="message"/>
+  <div>
+    <v-app-bar color="blue">
+      {{ name }}
+      <v-btn @click="goTo('/home')">Voltar para página principal</v-btn>
+    </v-app-bar>
+    <div v-for="(message, index) in messages" :key="index">
+      <MessageCard :message="message" />
+    </div>
+    <BottomToolbar @send-message="addMessage($event)" />
   </div>
-  <BottomToolbar @send-message="addMessage($event)" />
-</div>
 </template>
 
 <script>
-import MessageCard from '../components/MessageCard.vue'
-import BottomToolbar from '../components/BottomToolbar.vue'
+import MessageCard from '../components/chat/MessageCard.vue'
+import BottomToolbar from '../components/chat/BottomToolbar.vue'
 
 export default {
   components: {
@@ -31,7 +31,7 @@ export default {
         {
           name: 'Felipe Sabino',
           text: 'Tudo bem?'
-        },
+        }
       ]
     }
   },
